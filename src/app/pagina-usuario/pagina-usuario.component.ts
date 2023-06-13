@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Favoritos } from '../favoritos.service';
 import { Produto } from '../produtos.service';
+import { Ofertas } from '../ofertas.service';
 
 @Component({
   selector: 'app-pagina-usuario',
@@ -14,7 +15,7 @@ export class PaginaUsuarioComponent implements OnInit {
   dadosUsuarios: any;
   favoritados: any;
 
-  constructor(private produtos: Produto, private favoritos: Favoritos) {}
+  constructor(private produtos: Produto, private favoritos: Favoritos, private Oferta:Ofertas) {}
 
   ngOnInit(): void {
     firebase.auth().onAuthStateChanged((user: any) => {
@@ -41,10 +42,16 @@ export class PaginaUsuarioComponent implements OnInit {
     });
   }
 
-  excluirProduto(produto: any) {
-    this.produtos.DeletarProduto(produto).then((response) => {
+ async excluirProduto (produto: any) {
+    await this.produtos.DeletarProduto(produto).then((response) => {
       window.alert('Produto deletado com sucesso');
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      },1500)
+      
     });
   }
+  
+
+
 }
