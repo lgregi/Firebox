@@ -1,0 +1,9 @@
+.login-container {
+  margin-top: 120px;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.login-container form input {
+  width: 100%;
+}

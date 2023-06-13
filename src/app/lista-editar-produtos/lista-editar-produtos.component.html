@@ -1,0 +1,17 @@
+<article class="container bg-tema-escuro-2 lista-produto-wrapper">
+  <h1 class="font-1-xxl cor-texto-b-3 mb-12">Produtos</h1>
+  <p class="font-2-m cor-texto-b-6 mb-60">Estes são todos os produtos que foram cadastrados por você.</p>
+  <div class="lista-produto-produtos" *ngIf="produtosCriados && produtosCriados.length > 0">
+    <div class="lista-produto-produtos-produto" *ngFor="let produto of produtosCriados">
+      <figure class="mb-12">
+        <img [src]="produto.url[0]">
+      </figure>
+      <h2 class="font-2-m cor-texto-b-6">{{produto.titulo}}</h2>
+      <p class="font-2-m cor-texto-b-3 mb-12">R$ {{produto.valor}}</p>
+      <div class="lista-produto-produtos-editar-btns">
+        <a class="button" (click)="excluirProduto(produto)">Excluir</a>
+      </div>
+    </div>
+
+  </div>
+</article>

@@ -1,0 +1,40 @@
+.favoritos-wrapper {
+  margin-top: 7.5rem;
+  margin-bottom: 12.5rem;
+  padding: 2.5rem 5rem;
+}
+
+@media (max-width: 900px) {
+  .favoritos-wrapper {
+    padding: 1.5rem;
+  }
+  .favoritos-wrapper h1 {
+    font: var(--font-1-xl);
+  }
+  .favoritos-wrapper p {
+    font: var(--font-2-s);
+  }
+}
+
+.favoritos-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 235px));
+  gap: 1.5rem 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .favoritos-produtos {
+    place-content: center;
+  }
+}
+
+.favoritos-produtos-produto {
+  padding: 0.625rem 0.625rem 1.25rem;
+  border: 2px solid var(--cor-b-9);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.favoritos-produtos-produto img {
+  object-fit: cover;
+}

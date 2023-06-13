@@ -1,0 +1,44 @@
+<article class="container bg-tema-escuro-2 editar-produto-wrapper">
+  <h1 class="font-1-xxl mb-16 cor-texto-b-3">Editar Produto</h1>
+  <div class="editar-produto-form">
+  <p class="font-2-l mb-12 cor-texto-b-6">Preencha o formulário abaixo e Edite o seu produto!</p>
+    <form>
+      <div class="font-2-s cor-texto-b-4 mb-16">
+        <label for="titulo" class="mb-4">Título Produto</label>
+        <input type="text" name="titulo" id="titulo" class="font-2-s">
+      </div>
+      <div class="font-2-s cor-texto-b-4 mb-16">
+        <label for="preco" class="mb-4">Preço do Produto</label>
+        <input type="text" name="preco" id="preco" class="font-2-s">
+      </div>
+      <div class="font-2-s cor-texto-b-4 mb-16">
+        <label for="descricao" class="mb-4">Descrição do produto</label>
+        <textarea type="text" name="descricao" id="descricao" class="font-2-s" rows="5"></textarea>
+      </div>
+      <div class="font-2-s cor-texto-b-4 mb-16">
+        <label for="categorias">Selecione uma categoria:</label>
+        <select id="categorias" name="categorias">
+          <option value="eletronicos">Eletrônicos</option>
+          <option value="moda-acessorios">Moda e Acessórios</option>
+          <option value="casa-decoracao">Casa e Decoração</option>
+          <option value="automoveis">Automóveis</option>
+          <option value="esportes-lazer">Esportes e Lazer</option>
+          <option value="beleza-cuidados-pessoais">Beleza e Cuidados Pessoais</option>
+          <option value="livros-filmes-musica">Livros, Filmes e Música</option>
+          <option value="saude-bem-estar">Saúde e Bem-estar</option>
+          <option value="alimentos-bebidas">Alimentos e Bebidas</option>
+          <option value="outros">Outros</option>
+        </select>
+      </div>
+      <div class="font-2-s cor-texto-b-4 mb-16">
+        <label for="fotos" class="mb-4">Fotos</label>
+        <input type="file" multiple name="fotos[]" id="fotos" class="font-2-s editar-produto-form-arquivo" (change)="onFileChange($event)">
+      </div>
+    </form>
+    <div class="editar-produto-imgs">
+      <figure *ngFor="let file of files">
+        <img [src]="file.url" alt="{{file.name}}">
+      </figure>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,117 @@
+.usuario-container {
+  margin: 7.5rem auto 12.5rem;
+  border-radius: 4px;
+  padding: 2.5rem 5rem;
+}
+
+@media (max-width: 1200px) {
+  .usuario-container {
+    margin: 7.5rem 1rem 12.5rem;
+    padding: 1.25rem 2.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .usuario-container h1 {
+    font: var(--font-1-xl);
+  }
+  .usuario-container p {
+    font: var(--font-2-s);
+  }
+  .usuario-container h2 {
+    font: var(--font-2-m);
+  }
+}
+
+.usuario-favoritos-wrapper,
+.usuario-produto-editar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-favoritos-produtos,
+.usuario-produto-editar-produtos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1150px) {
+  .usuario-favoritos-produtos,
+  .usuario-produto-editar-produtos {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .usuario-favoritos-produtos,
+  .usuario-produto-editar-produtos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 630px) {
+  .usuario-favoritos-produtos,
+  .usuario-produto-editar-produtos {
+    overflow-x: scroll;
+    display: flex;
+  }
+}
+
+.usuario-favoritos-produto,
+.usuario-produto-editar-produto {
+  width: 235px;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--cor-b-11);
+  border: 2px solid var(--cor-b-10);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.usuario-favoritos-produto img,
+.usuario-produto-editar-produto img {
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.usuario-produto-editar-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.usuario-produto-editar-btns .button {
+  padding: 0.25rem 0.5rem;
+  font: var(--font-1-xs-b);
+}
+
+@media (max-width: 630px) {
+  .usuario-favoritos-produto,
+  .usuario-produto-editar-produto {
+    flex-shrink: 0;
+  }
+}
+
+.usuario-favoritos-verTodos,
+.usuario-produto-editar-verTodos {
+  width: max-content;
+  position: relative;
+  align-self: flex-end;
+}
+
+.usuario-favoritos-verTodos::after,
+.usuario-produto-editar-verTodos::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 50%;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--cor-e-5);
+  transition: width 0.3s ease-in-out;
+}
+
+.usuario-favoritos-verTodos:hover::after,
+.usuario-produto-editar-verTodos:hover::after {
+  width: 100%;
+}

@@ -1,0 +1,13 @@
+.cadastro-container {
+  margin-top: 120px;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.cadastro-container form label {
+  display: block;
+}
+
+.cadastro-container form input {
+  width: 100%;
+}

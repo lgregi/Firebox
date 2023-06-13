@@ -1,0 +1,161 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2.5rem;
+  padding: 1rem 0;
+}
+
+@media (max-width: 600px) {
+  .header {
+    grid-template-columns: 1fr 4fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    grid-template-columns: auto 4fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+.header nav {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+}
+
+.header nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+@media (max-width: 500px) {
+  .header {
+    gap: 1rem;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .logo p {
+    font: var(--font-1-l);
+  }
+  .logo img {
+    width: 64px;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo p {
+    display: none;
+  }
+  .logo img {
+    width: 48px;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo img {
+    min-width: 48px;
+  }
+}
+
+.formulario-pesquisa {
+  align-self: center;
+  position: relative;
+}
+
+.barra-pesquisa {
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem;
+  background: var(--cor-b-branco);
+  color: var(--cor-b-preto);
+}
+
+.barra-pesquisa:focus {
+  color: var(--cor-b-preto);
+}
+
+.formulario-pesquisa button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translate3d(0, -50%, 0);
+  cursor: pointer;
+  z-index: 1;
+}
+
+@media (max-width: 800px) {
+  .header nav .login-cadastro {
+    font: var(--font-2-s);
+    gap: 1rem;
+  }
+}
+
+.header nav .login-cadastro {
+  display: block;
+  position: absolute;
+  top: 95px;
+  left: 0;
+  padding: 1rem;
+  background: var(--cor-e-gradiente-invertido);
+  width: 100%;
+  animation: toDown 0.3s forwards;
+  overflow: hidden;
+}
+
+.header nav .login-cadastro li:not(:last-child) {
+  margin-bottom: var(--mb-12);
+  padding-bottom: var(--mb-12);
+  border-bottom: 2px solid var(--cor-e-6);
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: #262626;
+  transform: translateX(-5px);
+}
+
+.btn .icon {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+@keyframes toDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

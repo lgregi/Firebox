@@ -1,0 +1,13 @@
+<article class="container bg-tema-escuro-2 favoritos-wrapper">
+  <h1 class="font-1-xxl cor-texto-b-3 mb-12">Favoritos</h1>
+  <p class="font-2-m cor-texto-b-6 mb-60">Estes são todos os produtos que foram favoritados por você.</p>
+  <div class="favoritos-produtos" *ngIf="produtosFavoritados">
+    <a [routerLink]="'/produto-favoritado/' + favorito.key" class="favoritos-produtos-produto" *ngFor="let favorito of produtosFavoritados">
+      <figure class="mb-12">
+        <img src="{{favorito.url[0]}}" width="215" height="128">
+      </figure>
+      <h2 class="font-2-m cor-texto-b-6 mb-8">{{favorito.titulo}}</h2>
+      <p class="font-2-m cor-texto-b-3">R$ {{favorito.valor}}</p>
+    </a>
+  </div>
+</article>

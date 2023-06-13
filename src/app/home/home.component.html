@@ -1,0 +1,128 @@
+<section class="bg-tema-escuro">
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+  <a href="#" class="container carrossel mb-120">
+    <figure><img src="../../assets/carrossel.png" alt=""></figure>
+  </a>
+</section>
+<article class="produtos bg-tema-escuro-2 mb-120">
+  <h1 class="container cor-e-5 font-1-xxl mb-20 produtos-titulo">Alguns Produtos Disponíveis</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of principaisProdutos">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="eletronicos">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Eletrônicos</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of eletronicos">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="moda_acessorios">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Moda Acessórios</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of  moda_acessorios">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="casa_decoracao">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Casa Decoração</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of  casa_decoracao">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="automoveis">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Automóveis</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of automoveis">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="esportes_lazer">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Esportes e lazer</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of esportes_lazer">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="beleza_cuidados_pessoais">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Beleza e cuidados pessoais</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of beleza_cuidados_pessoais">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="livros_filmes_musica">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Livros, filmes e musica</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of livros_filmes_musica">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="saude_bem_estar">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Saúde e bem-estar</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of saude_bem_estar">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>
+<article class="container mb-200" *ngIf="outros">
+  <h1 class="cor-e-5 font-1-xxl mb-20 categorias-titulo">Outros</h1>
+  <div class="container produtos-container">
+    <a [routerLink]="'/produto/' + produto.key" class="produto bg-gradiente" *ngFor="let produto of outros">
+      <figure><img [src]="produto.url[0]" alt="" width="280" height="170"></figure>
+      <div class="produto-desc">
+        <p class="font-2-xs cor-nome-produto">{{produto.titulo}}</p>
+        <h2 class="font-1-xl cor-texto">R$ {{produto.valor}}</h2>
+      </div>
+    </a>
+  </div>
+</article>

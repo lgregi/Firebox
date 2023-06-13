@@ -1,0 +1,12 @@
+<article class="pesquisa-wrapper container">
+  <div *ngFor="let produto of produtosPesquisados" class="pesquisa-produto bg-tema-escuro-2 mb-40">
+    <img [src]="produto.url[0]" width="180" height="180">
+    <div class="pesquisa-produto-descricao">
+      <div class="pesquisa-produtos-descricao-nomePreco">
+        <p class="font-2-l cor-texto-b-3 mb-8">{{produto.titulo}}</p>
+        <p class="font-2-xl cor-texto-branco mb-32">R$ {{produto.valor}}</p>
+      </div>
+      <p class="font-2-xs cor-texto-b-6">Disponível para compra</p>
+    </div>
+  </div>
+</article>

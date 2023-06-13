@@ -1,0 +1,13 @@
+.editar-container {
+  margin-top: 120px;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.editar-container form label {
+  display: block;
+}
+
+.editar-container form input {
+  width: 100%;
+}

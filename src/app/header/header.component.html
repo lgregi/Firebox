@@ -1,0 +1,36 @@
+<header class="bg-gradiente">
+  <div class="header container">
+    <a routerLink="/" class="logo">
+      <img src="../../assets/Vector.svg" alt="" width="80" height="64">
+      <p class="font-1-xl cor-texto">Firebox</p>
+    </a>
+    <form [formGroup]="formulario" (ngSubmit)="pesquisar()" class="formulario-pesquisa" >
+    <input class="font-1-m barra-pesquisa" type="text" placeholder="barra pesquisa" formControlName="pesquisa">
+    <button><img src="../assets/zoom-out.svg" width="27" height="27"></button>
+    </form>
+    <nav>
+  <button class="btn" (click)="menuMobile()">
+    <span class="icon">
+      <svg viewBox="0 0 175 80" width="40" height="40">
+        <rect width="80" height="15" fill="#262626" rx="10"></rect>
+        <rect y="30" width="80" height="15" fill="#262626" rx="10"></rect>
+        <rect y="60" width="80" height="15" fill="#262626" rx="10"></rect>
+      </svg>
+    </span>
+  </button>
+  <ng-container *ngIf="estaLogado(); else loginCadastro">
+    <ul class="font-2-m cor-texto login-cadastro" *ngIf="menuMobileIsOpen">
+      <li class="mb-12"><a routerLink="/usuario">Minha página</a></li>
+      <li class="mb-12" (click)="logout()"><a routerLink="">Sair</a></li>
+    </ul>
+  </ng-container>
+  <ng-template #loginCadastro>
+    <ul class="font-2-l cor-texto login-cadastro" *ngIf="menuMobileIsOpen">
+      <li class="mb-12"><a routerLink="/login">Login</a></li>
+      <li class="mb-12"><a routerLink="/cadastro">Cadastro</a></li>
+    </ul>
+  </ng-template>
+</nav>
+
+  </div>
+</header>

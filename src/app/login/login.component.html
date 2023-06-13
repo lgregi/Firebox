@@ -1,0 +1,14 @@
+<article class="container bg-tema-escuro-2 mb-200 login-container">
+  <h1 class="font-1-xl mb-20 cor-texto-b-3">Login</h1>
+  <form [formGroup]="formulario" (ngSubmit)="autenticar()">
+    <div class="font-2-m mb-8 cor-texto-b-3">
+      <label for="email" class="font-2-s">Email</label>
+      <input type="email" name="email" id="email" class="font-2-s" formControlName="email">
+    </div>
+    <div class="font-2-m mb-16 cor-texto-b-3">
+      <label for="senha" class="font-2-s">Senha</label>
+      <input type="password" name="senha" id="senha" class="font-2-s" formControlName="senha">
+    </div>
+    <button class="font-1-m-b button">Entrar</button>
+  </form>
+</article>
