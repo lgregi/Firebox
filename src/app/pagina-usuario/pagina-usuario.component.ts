@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { Favoritos } from '../favoritos.service';
 import { Produto } from '../produtos.service';
 import { Ofertas } from '../ofertas.service';
+import { Autenticacao } from '../autenticacao.service';
 
 @Component({
   selector: 'app-pagina-usuario',
@@ -18,7 +19,8 @@ export class PaginaUsuarioComponent implements OnInit {
   constructor(
     private produtos: Produto,
     private favoritos: Favoritos,
-    private Oferta: Ofertas
+    private Oferta: Ofertas,
+    private autenticacao: Autenticacao
   ) {}
 
   ngOnInit(): void {
@@ -47,11 +49,41 @@ export class PaginaUsuarioComponent implements OnInit {
   }
 
   async excluirProduto(produto: any) {
-    await this.produtos.DeletarProduto(produto).then((response) => {
-      window.alert('Produto deletado com sucesso');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+    const confirmar = window.confirm(
+      'Tem certeza que deseja excluir este anúncio?'
+    );
+    if (confirmar) {
+      await this.produtos.DeletarProduto(produto).then((response) => {
+        window.alert('Produto deletado com sucesso');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      });
+    }
+  }
+  async ExcluirConta() {
+    const confirmar = window.confirm(
+      'Tem certeza que deseja excluir a sua conta?'
+    );
+    if (confirmar) {
+      //Todo o restante pra apagar a conta
+      try {
+        await this.autenticacao.DeletarUsuarioBD(this.email).then(() => {
+          this.ApagarTudo(this.email);
+        });
+
+        await Promise.all([]);
+      } catch (error) {}
+    }
+  }
+
+  public async ApagarTudo(email: any) {
+    await this.autenticacao.DeletarProdutosCadastrados(email).then(() => {
+      this.autenticacao.desativarConta().then(() => {
+        setTimeout(() => {
+          this.autenticacao.sair();
+        }, 2500);
+      });
     });
   }
 }

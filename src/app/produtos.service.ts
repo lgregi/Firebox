@@ -445,7 +445,7 @@ export class Produto {
     });
   }
 
-  public Sucess() {
-    this.router.navigate(['/home']);
+  public async Sucess() {
+    await this.router.navigate(['/usuario']);
   }
 }

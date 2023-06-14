@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'pesquisa/:pesquisa',
     component: PesquisaComponent,
   },
+  {
+    path: 'pesquisa-2/:pesquisa',
+    component: PesquisaComponent,
+  },
 ];
 
 @NgModule({

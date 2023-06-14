@@ -53,35 +53,43 @@ export class CadastroComponent implements OnInit {
   }
 
   CadastrarUsuario(): void {
-    this.isLoading = true;
-    this.warning = '';
-    this.formularioAlterado = false;
-    // Verifica se o formulário é válido
-    if (this.formulario.valid) {
-      this.isLoading = true;
-      const usuario: Usuario = new Usuario(
-        this.formulario.value.email,
-        this.formulario.value.nome_completo,
-        this.formulario.value.telefone,
-        this.formulario.value.nome_usuario,
-        btoa(this.formulario.value.senha)
-      );
-
-      this.autenticacao
-        .CadastrarUser(usuario)
-        .then(() => {
-          this.exibirlogin();
-          this.isLoading = false;
-        })
-        .catch((err) => {
-          this.warning = 'Formulário inválido';
-          this.isLoading = false;
-        });
+    if (
+      this.formulario.value.senha.length < 6 ||
+      this.formulario.value.nome_usuario.length < 3 ||
+      this.formulario.value.nome_completo.length < 3
+    ) {
+      alert('Preencha todos os campos');
     } else {
-      console.log(this.formulario.valid);
-      // Formulário inválido, exibir mensagem de erro ou realizar outras ações
-      this.warning = 'Formulário inválido';
-      this.isLoading = false;
+      this.isLoading = true;
+      this.warning = '';
+      this.formularioAlterado = false;
+      // Verifica se o formulário é válido
+      if (this.formulario.valid) {
+        this.isLoading = true;
+        const usuario: Usuario = new Usuario(
+          this.formulario.value.email,
+          this.formulario.value.nome_completo,
+          this.formulario.value.telefone,
+          this.formulario.value.nome_usuario,
+          btoa(this.formulario.value.senha)
+        );
+
+        this.autenticacao
+          .CadastrarUser(usuario)
+          .then(() => {
+            this.exibirlogin();
+            this.isLoading = false;
+          })
+          .catch((err) => {
+            this.warning = 'Formulário inválido';
+            this.isLoading = false;
+          });
+      } else {
+        console.log(this.formulario.valid);
+        // Formulário inválido, exibir mensagem de erro ou realizar outras ações
+        this.warning = 'Formulário inválido';
+        this.isLoading = false;
+      }
     }
 
     // função acionada no click e que serve para enviar os dados ao serviço, seguindo a lógica do model

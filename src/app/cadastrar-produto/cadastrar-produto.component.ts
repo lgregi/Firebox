@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Produto } from '../produtos.service';
 
@@ -29,7 +29,10 @@ export class CadastrarProdutoComponent implements OnInit {
     titulo: new FormControl(null),
     categoria: new FormControl(null),
     descricao: new FormControl(null),
-    valor: new FormControl(null),
+    valor: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^\d+$/),
+    ]),
   });
 
   constructor(private produto: Produto) {}
@@ -47,7 +50,6 @@ export class CadastrarProdutoComponent implements OnInit {
   public async publicar() {
     this.isLoading = true;
     const promises = [];
-
     promises.push(
       await this.produto.publicar({
         email: this.email,
@@ -94,7 +96,9 @@ export class CadastrarProdutoComponent implements OnInit {
     Promise.all(promises)
       .then(() => {
         this.success = 'Produto cadastrado com sucesso';
-        // this.produto.Sucess();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((error) => {
         this.warning = 'Não foi possível cadastrar o produto';

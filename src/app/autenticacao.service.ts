@@ -12,16 +12,10 @@ export class Autenticacao {
   constructor(private rotas: Router) {}
 
   public async CadastrarUser(usuario: Usuario): Promise<any> {
-    //this.contador ++
-    //console.log("Teste de recuperação dos dados de cadastro:",this.contador , usuario);
-    //para colocar o usuário no sistema de utenticaçoa do firebase
     return firebase
       .auth()
       .createUserWithEmailAndPassword(usuario.email, usuario.senha)
       .then((resposta: any) => {
-        // para relacionar o e-mail ao restante dos atributos do usuario
-        //o campo "usuario_detalhe" está sendo criado aqui e faz referencia ao trecho -
-        // databaseURL: "https://firebox-754d7-default-rtdb.firebaseio.com", existente no app.component.ts
         firebase
           .database()
           .ref(`usuario_detalhe/${btoa(resposta.email)}`)
@@ -79,7 +73,7 @@ export class Autenticacao {
 
   //esta função só funcionará se o usuário estiver autenticado e deleta apenas do sistema de autenticação
 
-  public desativarConta(): void {
+  public async desativarConta() {
     firebase
       .auth()
       .currentUser?.delete()
@@ -117,6 +111,98 @@ export class Autenticacao {
       })
       .catch((err: Error) => {
         console.log(err);
+      });
+  }
+
+  public async DeletarProdutosCadastrados(email: string): Promise<any> {
+    let key: Array<any> = [];
+    let url: Array<any> = [];
+    let ok: boolean = true;
+    return new Promise((resolve, reject) => {
+      this.DeletarProdutosFavoritados(email);
+      firebase
+        .database()
+        .ref(`produtos`)
+        .orderByChild('email')
+        .equalTo(email)
+        .once('value')
+        .then((snapshot) => {
+          let produtos: Array<any> = [];
+          snapshot.forEach((childSnapshot: any) => {
+            let publicacao = childSnapshot.val();
+            publicacao.key = childSnapshot.key;
+            publicacao.url = childSnapshot.val().url;
+            produtos.push(publicacao);
+          });
+          produtos.forEach((keys: any) => {
+            key = keys.key;
+            url = keys.url;
+            for (let i = 0; i < url.length; i++) {
+              if (i === 0) {
+                firebase
+                  .storage()
+                  .ref()
+                  .child(`${key}/${key}`)
+                  .delete()
+                  .then(() => {
+                    console.log('deletado do storage 1');
+                  });
+              } else if (i === 1) {
+                firebase
+                  .storage()
+                  .ref()
+                  .child(`${key}/${key}1`)
+                  .delete()
+                  .then(() => {
+                    console.log('deletado do storage 2');
+                  });
+              } else if (i === 2) {
+                firebase
+                  .storage()
+                  .ref()
+                  .child(`${key}/${key}2`)
+                  .delete()
+                  .then(() => {
+                    console.log('deletado do storage 3');
+                  });
+              } else if (i === 3) {
+                firebase
+                  .storage()
+                  .ref()
+                  .child(`${key}/${key}3`)
+                  .delete()
+                  .then(() => {
+                    console.log('deletado do storage 4');
+                  });
+              }
+              firebase
+                .database()
+                .ref(`produtos/${key}`)
+                .remove()
+                .then(() => {
+                  // console.log('deletado')
+                });
+            }
+          });
+          resolve(ok);
+        })
+        .catch((err: Error) => {
+          reject(err);
+          console.error(err);
+        });
+    });
+  }
+
+  public DeletarProdutosFavoritados(email: any): void {
+    firebase
+      .database()
+      .ref(`favoritos/${btoa(email)}`)
+      .remove()
+      .then(() => {
+        console.log('Desfavoritado com sucesso');
+      })
+      .catch((error) => {
+        console.log(`Erro ao desfavoritar: ${error}`);
       });
   }
 }

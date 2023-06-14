@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  pesquisar() {
+  /* pesquisar() {
     if (this.location.path().includes('/pesquisa/')) {
       // window.location.reload();
       this.router.navigateByUrl('/pesquisa/' + this.resposta);
@@ -37,11 +37,21 @@ export class HeaderComponent implements OnInit {
 
       //this.limpar();
     }
+  }*/
+
+  pesquisar() {
+    if (this.location.path().includes('/pesquisa-2/')) {
+      this.router.navigateByUrl('/pesquisa/' + this.formulario.value.pesquisa);
+    } else {
+      this.router.navigateByUrl(
+        '/pesquisa-2/' + this.formulario.value.pesquisa
+      );
+    }
   }
   limpar() {
-    this.resposta = '';
+    this.formulario.value.pesquisa = this.resposta;
   }
-  atualizaresposta(resposta: Event): void {    
+  atualizaresposta(resposta: Event): void {
     this.resposta = (<HTMLInputElement>resposta.target).value;
     console.log(this.resposta);
   }
