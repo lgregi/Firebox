@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Autenticacao } from '../autenticacao.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,17 +13,37 @@ export class HeaderComponent implements OnInit {
   @Input() showHome!: boolean;
   menuMobileIsOpen = false;
   estadoLogin = false;
+  resposta: any = '';
 
   public formulario: FormGroup = new FormGroup({
-    pesquisa: new FormControl(null),
+    pesquisa: new FormControl(''),
   });
 
-  constructor(private autenticacao: Autenticacao, private router: Router) {}
+  constructor(
+    private autenticacao: Autenticacao,
+    private router: Router,
+    private location: Location
+  ) {}
 
   ngOnInit() {}
 
   pesquisar() {
-    this.router.navigateByUrl('/pesquisa/' + this.formulario.value.pesquisa);
+    if (this.location.path().includes('/pesquisa/')) {
+      // window.location.reload();
+      this.router.navigateByUrl('/pesquisa/' + this.resposta);
+      //this.limpar();
+    } else {
+      this.router.navigateByUrl('/pesquisa/' + this.resposta);
+
+      //this.limpar();
+    }
+  }
+  limpar() {
+    this.resposta = '';
+  }
+  atualizaresposta(resposta: Event): void {    
+    this.resposta = (<HTMLInputElement>resposta.target).value;
+    console.log(this.resposta);
   }
 
   estaLogado() {

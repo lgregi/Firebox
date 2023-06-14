@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.promises.push(
-      this.produtos.consultarProdutosPaginados(6,1).then((produtos) => {
+      this.produtos.consultarProdutosPaginados(6, 1).then((produtos) => {
+        console.log(this.principaisProdutos, produtos);
         this.principaisProdutos = produtos;
-        console.log(this.principaisProdutos);
       })
     );
     this.promises.push(

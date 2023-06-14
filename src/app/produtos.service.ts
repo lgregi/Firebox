@@ -9,13 +9,13 @@ export class Produto {
   public imagem: Array<any> = [];
   public key: any;
   public nome: any;
+  public telefone: any;
   public contador: number = 0;
   constructor(private router: Router) {}
 
   //função para armazenar uma imagem no firebase e criar o nó contendo as informações do produto
-  public publicar(publicacao: any): Promise<any> {
+  public async publicar(publicacao: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      //armazena as informações do produto no firebase
       firebase
         .database()
         .ref(`produtos`)
@@ -29,10 +29,8 @@ export class Produto {
           descricao: publicacao.descricao,
         })
         .then((resposta: any) => {
-          // console.log(resposta)
           let nomeImagem = resposta.key;
           this.key = resposta.key;
-          //armazena a imagem no firabase com id dos detalhes do produto
           firebase
             .storage()
             .ref()
@@ -41,18 +39,15 @@ export class Produto {
             .then((snapshot) => {
               console.log('concluida1');
               snapshot.ref.getDownloadURL().then((url) => {
-                // URL da imagem obtida
                 this.imagem[0] = url;
-                console.log('url obtidade1', url);
+                console.log('url obtida1', url);
                 resolve(url);
               });
             })
             .catch((error) => {
-              // Tratamento de erro
               console.error(error);
               reject(error);
             });
-          //console.log(resposta.key)
           console.log(publicacao);
           console.log('chegamos até o controle de dados');
         });
@@ -243,7 +238,10 @@ export class Produto {
     }
   }
 
-  public voltarPagina(produtoPorPagina: number, paginaAtual: number): Promise<any> {
+  public voltarPagina(
+    produtoPorPagina: number,
+    paginaAtual: number
+  ): Promise<any> {
     try {
       const paginaAnterior = paginaAtual - 2;
       return this.consultarProdutosPaginados(produtoPorPagina, paginaAnterior);
@@ -253,9 +251,7 @@ export class Produto {
     }
   }
   // filtro por categoria
-  public consultarProdutosPorCategoria(
-    categoria: string
-  ): Promise<any> {
+  public consultarProdutosPorCategoria(categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
       firebase
         .database()
@@ -331,37 +327,39 @@ export class Produto {
   }
 
   //acessa dados do usuario e retorna o nome para armazenamento
-  public acessarDadosUsuarioDetalhe(email: string): string {
-    let nome: string = '';
-    firebase
-      .database()
-      .ref(`usuario_detalhe/${btoa(email)}`)
-      .on('value', (snapshot: any) => {
-        snapshot.forEach((childSnapshot: any) => {
-          const dadosUsuario = childSnapshot.val();
-          nome = dadosUsuario.nome_usuario;
-          console.log(dadosUsuario.nome_usuario);
+  public async acessarDadosUsuarioDetalhe(email: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      firebase
+        .database()
+        .ref(`usuario_detalhe/${btoa(email)}`)
+        .on('value', (snapshot: any) => {
+          snapshot.forEach((childSnapshot: any) => {
+            const dadosUsuario = childSnapshot.val();
+            const nome = dadosUsuario.nome_usuario;
+            console.log(nome);
+            resolve(nome);
+          });
         });
-      });
-
-    return nome;
+    });
   }
-  //acessa o telefone para salvar nos dados do produto
-  public acessarTelefone(email: string): string {
-    let nome: string = '';
-    firebase
-      .database()
-      .ref(`usuario_detalhe/${btoa(email)}`)
-      .on('value', (snapshot: any) => {
-        snapshot.forEach((childSnapshot: any) => {
-          const dadosUsuario = childSnapshot.val();
-          nome = dadosUsuario.telefone;
-          console.log(dadosUsuario.telefone);
+
+  // Acessa o telefone para salvar nos dados do produto
+  public async acessarTelefone(email: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      firebase
+        .database()
+        .ref(`usuario_detalhe/${btoa(email)}`)
+        .on('value', (snapshot: any) => {
+          snapshot.forEach((childSnapshot: any) => {
+            const dadosUsuario = childSnapshot.val();
+            const telefone = dadosUsuario.telefone;
+            console.log(telefone);
+            resolve(telefone);
+          });
         });
-      });
-
-    return nome;
+    });
   }
+
   //acessa todos os dados do usuário do autenticado
   public acessarDadosUsuario(email: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -445,5 +443,9 @@ export class Produto {
           reject(ok);
         });
     });
+  }
+
+  public Sucess() {
+    this.router.navigate(['/home']);
   }
 }

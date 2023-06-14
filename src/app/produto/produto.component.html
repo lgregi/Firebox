@@ -11,17 +11,18 @@
       </div>
     </div>
     <div class="produto-box">
-      <p class="produto-vendedor font-2-s mb-8 cor-texto-b-3" *ngIf="produto">{{produto[0].nome_usuario}}</p>
+      <p class="produto-vendedor font-2-s mb-8 cor-texto-b-3" *ngIf="produto">{{nome}}</p>
       <h2 class="font-2-xl mb-12 produto-preco cor-e-5" *ngIf="produto">R$ {{produto[0].valor}}</h2>
       <p class="font-2-xs mb-8 cor-texto-b-6">Entre em contato com o vendedor e finalize a sua compra agora!</p>
       <div class="produto-box-btns">
-        <button class="button font-2-s">Chat <img src="../../assets/fogo-de-fundo-home.svg" alt="" width="24"></button>
+        <a *ngIf="!produto || !estaLogado()" routerLink="/login/" class="button font-2-s">Chat <img src="../../assets/fogo-de-fundo-home.svg" alt="" width="24"></a>
+        <a *ngIf="produto && estaLogado()" [href]="getWhatsAppLink()" class="button font-2-s" target="_blank">Chat <img src="../../assets/fogo-de-fundo-home.svg" alt="" width="24"></a>
         <button (click)="favoritar()" class="button font-2-s" [disabled]="disabled">Favoritar <img src="../../assets/box2-heart-fill.svg" alt="" width="24"></button>
       </div>
     </div>
     <div class="produto-desc">
       <h1 class="font-1-xl mb-16 cor-texto-b-3">Descrição</h1>
-      <p class="font-2-s cor-texto-b-6">O iPhone 14 é o novo lançamento da Apple, com processador A18 Bionic, tela OLED Super Retina XDR de 6,7 polegadas, tecnologia 5G e câmera traseira tripla de 64 MP. Além disso, oferece recursos de segurança avançados, incluindo reconhecimento facial e scanner de impressão digital. Com diversas cores modernas e elegantes, experimente agora mesmo o iPhone 14 e aproveite todos os recursos incríveis que ele oferece.</p>
+      <p *ngIf="produto" class="font-2-s cor-texto-b-6">{{produto[0].descricao}}</p>
     </div>
     <div class="produto-box bg-b-1">
       <h3 class="font-2-s mb-6 cor-texto-b-3">Lembrete:</h3>

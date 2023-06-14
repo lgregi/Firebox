@@ -1,5 +1,6 @@
-<article class="pesquisa-wrapper container">
-  <div *ngFor="let produto of produtosPesquisados" class="pesquisa-produto bg-tema-escuro-2 mb-40">
+<article class="pesquisa-wrapper container" *ngIf="produtosPesquisados">
+  <div *ngIf="isLoading"><app-loading></app-loading></div>
+  <a *ngFor="let produto of produtosPesquisados" [routerLink]="'/produto/' + produto.key" class="pesquisa-produto bg-tema-escuro-2 mb-40">
     <img [src]="produto.url[0]" width="180" height="180">
     <div class="pesquisa-produto-descricao">
       <div class="pesquisa-produtos-descricao-nomePreco">
@@ -8,5 +9,5 @@
       </div>
       <p class="font-2-xs cor-texto-b-6">Disponível para compra</p>
     </div>
-  </div>
+  </a>
 </article>

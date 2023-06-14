@@ -15,13 +15,15 @@ export class CadastrarProdutoComponent implements OnInit {
   fileCount = 0;
   files: any[] = [];
   isLoading = false;
-  success: string = "";
-  warning: string = ""
+  success: string = '';
+  warning: string = '';
 
   public imagem: any;
   public imagem2: any;
   public imagem3: any;
   public imagem4: any;
+  public nome: any;
+  public telefone: any;
 
   public formulario: FormGroup = new FormGroup({
     titulo: new FormControl(null),
@@ -42,23 +44,25 @@ export class CadastrarProdutoComponent implements OnInit {
   }
 
   // função que manda os dados para o serviço de publicação
-  public publicar() {
+  public async publicar() {
     this.isLoading = true;
     const promises = [];
 
     promises.push(
-      this.produto.publicar({
+      await this.produto.publicar({
         email: this.email,
         titulo: this.formulario.value.titulo,
         categoria: this.formulario.value.categoria,
         valor: this.formulario.value.valor,
         imagem: this.imagem[0] ? this.imagem[0] : '',
-        nome_usuario: this.produto.acessarDadosUsuarioDetalhe(this.email),
+        nome_usuario: await this.produto.acessarDadosUsuarioDetalhe(this.email),
+        telefone: await this.produto.acessarTelefone(this.email),
+        descricao: this.formulario.value.descricao,
       })
     );
 
     promises.push(
-      this.produto.publicar2({
+      await this.produto.publicar2({
         email: this.email,
         titulo: this.formulario.value.titulo,
         categoria: this.formulario.value.categoria,
@@ -68,7 +72,7 @@ export class CadastrarProdutoComponent implements OnInit {
     );
 
     promises.push(
-      this.produto.publicar3({
+      await this.produto.publicar3({
         email: this.email,
         titulo: this.formulario.value.titulo,
         categoria: this.formulario.value.categoria,
@@ -78,7 +82,7 @@ export class CadastrarProdutoComponent implements OnInit {
     );
 
     promises.push(
-      this.produto.publicar4({
+      await this.produto.publicar4({
         email: this.email,
         titulo: this.formulario.value.titulo,
         categoria: this.formulario.value.categoria,
@@ -89,10 +93,11 @@ export class CadastrarProdutoComponent implements OnInit {
 
     Promise.all(promises)
       .then(() => {
-        this.success = "Produto cadastrado com sucesso";
+        this.success = 'Produto cadastrado com sucesso';
+        // this.produto.Sucess();
       })
       .catch((error) => {
-        this.warning = "Não foi possível cadastrar o produto"
+        this.warning = 'Não foi possível cadastrar o produto';
       })
       .finally(() => {
         this.isLoading = false;

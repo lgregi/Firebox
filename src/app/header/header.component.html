@@ -1,11 +1,12 @@
 <header class="bg-gradiente">
   <div class="header container">
-    <a routerLink="/" class="logo">
+    <a routerLink="/" class="logo" (click)="limpar()">
+   <button type="button" (click)="limpar()"></button>
       <img src="../../assets/Vector.svg" alt="" width="80" height="64">
       <p class="font-1-xl cor-texto">Firebox</p>
     </a>
     <form [formGroup]="formulario" (ngSubmit)="pesquisar()" class="formulario-pesquisa" >
-    <input class="font-1-m barra-pesquisa" type="text" placeholder="barra pesquisa" formControlName="pesquisa">
+    <input class="font-1-m barra-pesquisa" type="text" placeholder="barra pesquisa" (input)="atualizaresposta($event)" [value]="resposta">    
     <button><img src="../assets/zoom-out.svg" width="27" height="27"></button>
     </form>
     <nav>
@@ -20,8 +21,8 @@
   </button>
   <ng-container *ngIf="estaLogado(); else loginCadastro">
     <ul class="font-2-m cor-texto login-cadastro" *ngIf="menuMobileIsOpen">
-      <li class="mb-12"><a routerLink="/usuario">Minha página</a></li>
-      <li class="mb-12" (click)="logout()"><a routerLink="">Sair</a></li>
+      <li class="mb-12"><a routerLink="/usuario" (click)="limpar()">Minha página</a></li>
+      <li class="mb-12" (click)="logout()"><a routerLink="" (click)="limpar()">Sair</a></li>
     </ul>
   </ng-container>
   <ng-template #loginCadastro>

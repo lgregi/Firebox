@@ -32,6 +32,7 @@ export class ProdutoFavoritadoComponent implements OnInit {
     firebase.auth().onAuthStateChanged((user: any) => {
       this.email = user.email;
       this.route.paramMap.subscribe((params) => (this.key = params.get('key')));
+      console.log(this.email, this.key);
       this.ofertas
         .RetornaOfertaFavoritada(user.email, this.key!)
         .then((response) => {
