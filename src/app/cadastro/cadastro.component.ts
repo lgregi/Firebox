@@ -91,41 +91,5 @@ export class CadastroComponent implements OnInit {
         this.isLoading = false;
       }
     }
-
-    // função acionada no click e que serve para enviar os dados ao serviço, seguindo a lógica do model
-    // CadastrarUsuario(): void {
-    //   // alert('Funcionando')
-
-    //   //const senhaCriptografada = bcrypt.hashSync(this.formulario.value.senha, 10);
-
-    //   let usuario: Usuario = new Usuario(
-    //     this.formulario.value.email,
-    //     this.formulario.value.nome_completo,
-    //     this.formulario.value.telefone,
-    //     this.formulario.value.cpf,
-    //     this.formulario.value.nome_usuario,
-    //     btoa(this.formulario.value.senha)
-    //   );
-
-    //   if (
-    //     this.formulario.value.email == null ||
-    //     this.formulario.value.nome_completo == null ||
-    //     this.formulario.value.senha == null ||
-    //     this.formulario.value.telefone == null ||
-    //     this.formulario.value.cpf == null ||
-    //     this.formulario.value.nome_usuario == null
-    //   ) {
-    //     console.log(this.formulario.value);
-    //     alert('Preencha todos os campos');
-    //   } else {
-    //     // função do serviço de usuarios inicializada através do atributo instanciado no construtor
-    //     this.autenticacao
-    //       .CadastrarUser(usuario)
-    //       .then(() => {
-    //         this.exibirlogin();
-    //       })
-    //       .catch((err) => console.log(err));
-    //   }
-    // }
   }
 }
