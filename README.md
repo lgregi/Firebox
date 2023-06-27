@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
+Firebox is an advertising platform developed as part of an interdisciplinary project in the third semester of the Analysis and Systems Development course. The project was programmed using Typescript and Firebase, along with the Angular Framework. All the application logic was implemented on the front-end through Angular's own services. Firebox allows for the creation and display of advertisements, providing an interactive experience for users.
+
+Furthermore, Firebox offers the functionality of direct communication between users and advertisers. This enables interested parties to get in touch with advertisers to discuss advertising rates, negotiate details, and clarify any questions.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
